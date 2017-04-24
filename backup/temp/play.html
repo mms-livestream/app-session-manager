@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- scroll bar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="stylesheets/template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="stylesheets/template/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="stylesheets/template/css/creative.min.css" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link href="stylesheets/chat.css" rel="stylesheet" type="text/css">
+
+    <title>M&ampM's</title>
+  </head>
+  <body >
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html">M&ampM's</a>
+            </div>
+
+
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/profil">Mon profil</a></li>
+                    <li><a href="favoris.html">Favoris</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">About you</li>
+                    <li><a href="#">My account</a></li>
+                    <li><a href="/logOut">Log Out</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+
+    <!--    <div class="container theme-showcase" role="main"> -->
+
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+
+        <section class="bg-primary" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <h1 class="section-heading">Me and My Stream</h1>
+                        <hr class="light">
+                        <p class="text-faded">Use our live streaming video application and everything you need will finally be in your hands</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <div class="container"><div class="row">
+              <div class="col-sm-4" id="chatBox">
+                <div class="panel panel-primary">
+
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                    <div class="btn-group pull-right">
+                        <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </div>
+                </div>
+
+          <div class="panel-collapse collapse" id="collapseOne">
+          <div class="panel-body">
+            <ul id="messages" class="chat">
+              <li>
+                  <div class="chat-body clearfix">
+                      <div class="header">
+                          <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                              <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                      </div>
+                      <p>Very nice !</p>
+                  </div>
+              </li>
+             </ul>
+          </div>
+
+          <div class="panel-footer">
+          <div class="input-group" id="bottomChat">
+            <form action="">
+            <input id="m" autocomplete="off"  type="text" class="form-control input-sm" placeholder="Type your message here...">
+            <span class="input-group-btn">
+              <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+            </span>
+          </form>
+          </div></div></div></div></div>
+
+
+            <div class="col-sm-8">
+            <h2>16:9 Vidéo de Machin </h2>
+            <div class="embed-responsive embed-responsive-16by9" >
+              <div id="videocontainer"  style="size:100%" >
+                <video id="videoplayer" controls="true" ></video>
+              </div>
+          </div></div>
+      </div> </div>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="javascripts/dash.all.min.js"></script>
+        <script src="stylesheets/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="javascripts/index.js"></script>
+        <script src="javascripts/play.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+<script>
+    $(function () {
+    //  id=id+1;
+      var socket = io.connect('http://localhost:8080');
+        $('form').submit(function(){
+          if ( $('#m').val() != "") {
+      	   socket.emit('chat message', $('#m').val());
+      	   $('#m').val('');
+         }
+      		 return false;
+    		});
+		      socket.on('chat message', function(msg){
+
+          var date = new Date();
+          var hour = date.getHours();
+          hour = (hour < 10 ? "0" : "") + hour;
+          var min  = date.getMinutes();
+          min = (min < 10 ? "0" : "") + min;
+          var sec  = date.getSeconds();
+          sec = (sec < 10 ? "0" : "") + sec;
+          var now=hour+":"+min+":"+sec;
+
+        $('#messages').append($('<small class="text-muted">').text(now));
+        $('#messages').append($('<li>').text(msg));
+
+      });
+    });
+
+</script>
+
+
+
+  </body>
+</html>
