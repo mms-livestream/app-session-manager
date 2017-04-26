@@ -30,6 +30,7 @@ module.exports = (options) => {
 
     router.post('/login', function (req, res) {
         let data = req.body;
+	//console.log(typeof(data));
         service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"authenticate"}, data, (err, result) => {
             if (result.data.authenticated) {
                 let payload = {username: result.data.username};
