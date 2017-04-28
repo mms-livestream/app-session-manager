@@ -10,15 +10,25 @@ $(document).ready(function() {
       data: {"username": username, "password": password},
       dataType: "json",
       success: function(res) {
-        alert(res.toSource());
-        // res.send ma page: window location javascript change
+        if (res.status=="User not found") {
+          $('#login').find('.err').show();
+        }
+        else {
+          sessionStorage.setItem("token",res.token);
+          window.location.replace("http://localhost:8080/home");
+        }
       },
       error: function() {
         // message du pb en html
       }
     });
-
   });
+
+  $('#login').find('a').click(function(e) {
+   $('#register').show();
+   $('#login').hide();
+  });
+
 
   $('#register').find('button').click(function(e) {
     e.preventDefault();
@@ -32,7 +42,7 @@ $(document).ready(function() {
       data: {"username": username, "password": password, "email": email},
       dataType: "json",
       success: function(res) {
-        alert(res.toSource());
+        sessionStorage.setItem("token",res.token);
       },
       error: function() {
         // message du pb en html
