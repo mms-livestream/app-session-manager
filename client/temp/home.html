@@ -34,10 +34,10 @@
 
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="home">Home</a></li>
-                <li><a href="home/live">Live</a></li>
-                <li><a href="home/about">About</a></li>
-                <li><a href="home/contact">Contact</a></li>
+                <li id="home" class="active"><a href="home">Home</a></li>
+                <li id="live"><a href="home/live">Live</a></li>
+                <li id="about"><a href="home/about">About</a></li>
+                <li ><a href="home/contact">Contact</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -46,7 +46,7 @@
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header">About you</li>
                     <li><a href="#">My account</a></li>
-                    <li><a href="home/logOut">Log Out</a></li>
+                    <li id="logout"><a href="/">Log Out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -58,7 +58,7 @@
 
           <!-- Main jumbotron for a primary marketing message or call to action -->
 
-        <section class="bg-primary" id="about">
+        <section class="bg-primary">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -87,20 +87,20 @@
 
             <div class="col-sm-6">
               <h2>16:9 Vidéo 1 </h2>
-              <div class="col-lg-10"><a href="/home/play" data-id="0" class="screenshot" ><img src="segment/segment0/thumbnail.png" class="img-thumbnail"></div></a>
+              <div class="col-lg-10"><a href="/home/play" data-id="0" class="screenshot" ><img src="/segment/segment0/thumbnail.png" class="img-thumbnail"></div></a>
           </div>
             <div class="col-sm-6">
               <h2>16:9 Vidéo 2 </h2>
-              <div class="col-lg-10"><a href="/home/play" data-id="1" class="screenshot"><img src="segment/segment1/thumbnail.png" class="img-thumbnail"></div></a>
+              <div class="col-lg-10"><a href="/home/play" data-id="1" class="screenshot"><img src="/segment/segment1/thumbnail.png" class="img-thumbnail"></div></a>
             </div>
                 <div class="col-sm-6">
                 <h2>16:9 Vidéo 3 </h2>
-                <div class="col-lg-10"><a href="/home/play" data-id="2" class="screenshot"><img src="segment/segment2/thumbnail.png" class="img-thumbnail"></div></a>
+                <div class="col-lg-10"><a href="/home/play" data-id="2" class="screenshot"><img src="/segment/segment2/thumbnail.png" class="img-thumbnail"></div></a>
 
               </div>
               <div class="col-sm-6">
               <h2>16:9 Vidéo 4 </h2>
-              <div class="col-lg-10"><a href="/home/play" data-id="3" class="screenshot"><img src="segment/segment3/thumbnail.png" class="img-thumbnail"></div></a>
+              <div class="col-lg-10"><a href="/home/play" data-id="3" class="screenshot"><img src="/segment/segment3/thumbnail.png" class="img-thumbnail"></div></a>
 
             </div>
 
@@ -110,6 +110,9 @@
           <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
           <script src="/javascripts/dash.all.min.js"></script>
           <script src="/stylesheets/bootstrap/dist/js/bootstrap.min.js"></script>
-          <script src="/javascripts/index.js"></script>
+          <script src="/javascripts/forEverywhere.js"></script>
+          <script src="/javascripts/home.js"></script>
+
+
   </body>
 </html>

@@ -4,30 +4,38 @@ $(document).ready(function() {
     var username=$('#login').find(".inputUsername").val();
     var password=$('#login').find(".inputPassword").val();
 
-    $.ajax({
-      type: "POST",
-      url: "/api/login",
-      data: {"username": username, "password": password},
-      dataType: "json",
-      success: function(res) {
-        if (res.status=="User not found") {
-          $('#login').find('.err').show();
+    if (username!="" && password!="") {
+      $.ajax({
+        type: "POST",
+        url: "/api/login",
+        data: {"username": username, "password": password},
+        dataType: "json",
+        success: function(res) {
+          if (res.status=="User not found") {
+            $('#login').find('.err2').hide();
+            $('#login').find('.err1').show();
+          }
+          else {
+            sessionStorage.setItem("token",res.token);
+            window.location.replace("http://localhost:8080/home");
+          }
+        },
+        error: function() {
+          // message du pb en html
         }
-        else {
-          sessionStorage.setItem("token",res.token);
-          window.location.replace("http://localhost:8080/home");
-        }
-      },
-      error: function() {
-        // message du pb en html
-      }
-    });
+      });
+    }
+    else {
+      $('#login').find('.err1').hide();
+      $('#login').find('.err2').show();
+    }
   });
 
-  $('#login').find('a').click(function(e) {
-   $('#register').show();
-   $('#login').hide();
-  });
+
+    $('#login').find('a').click(function(e) {
+     $('#register').show();
+     $('#login').hide();
+    });
 
 
   $('#register').find('button').click(function(e) {

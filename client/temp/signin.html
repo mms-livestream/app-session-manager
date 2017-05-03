@@ -66,7 +66,8 @@
 
              <div class="container"><div class="row">
                <div id="login" class="col-xs-6 col-lg-8 center col-lg-offset-2 col-xs-offset-3">
-                 <div class='err' hidden class='alert alert-danger'><strong>Login failed</strong> Username not found or wrong password</div>
+                 <div hidden class="alert alert-danger err1"><strong>Login failed</strong> Username not found or wrong password</div>
+                 <div hidden class="alert alert-danger err2"><strong>Login failed</strong> Please fill the fields</div>
                   <form class="form-signin" method="post" action="/api/login">
                     <h2 class="form-signin-heading">Please sign in</h2>
                     <div class="form-group"><input type="text" name="username" class="form-control inputUsername" placeholder="Username" required autofocus> </div>
