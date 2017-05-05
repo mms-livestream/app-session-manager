@@ -56,7 +56,7 @@ module.exports = (options) => {
 
     router.get('/mpd/:id', function (req, res) {
         let id = req.params.id;
-        let pathMpd = `${config.DIR_ROOT}/data/${id}/mpd.mpd`;
+        let pathMpd = `${config.DIR_ROOT}/data/mpd/${id}.mpd`;
 
         if (fs.existsSync(pathMpd)) {
             res.sendFile(pathMpd);

@@ -7,6 +7,8 @@
 const Promise = require('bluebird');  //jshint ignore:line
 const fs = require('fs');
 
+const config = require('../../config.js');
+
 //API
 
 module.exports = function (options) {
@@ -29,12 +31,12 @@ module.exports = function (options) {
 
         validation.then(() => {
             let one = {};
-
+		console.log(service.cli);
             for (let id_viewer in poolServers) {
                 one = {"id_viewer": id_viewer, "servers": poolServers[id_viewer]};
                 (function(data) {   //jshint ignore:line
                     service.cli.NODE_MPD_GENERATOR.act({role:"mpd", cmd:"generate"}, data, (err, res) => {
-                        fs.writeFile("/home/rstoke/mpdfile"+data.id_viewer, res.data, function(err) {
+                        fs.writeFile(`${config.DIR_ROOT}/data/mpd/${data.id_viewer}.mpd`, res.data, function(err) {
                             if(err) {
                                 return console.log(err);
                             }

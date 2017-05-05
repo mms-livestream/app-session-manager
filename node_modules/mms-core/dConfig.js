@@ -7,7 +7,7 @@ let db = {
     NODE_METADATA_MANAGER: {"name":"NODE_METADATA_MANAGER", "service": {"host": "localhost", "port": 5001}, "server": {"host": "localhost", "port": 8081}},
     NODE_DB_CONTROLLER: {"name":"NODE_DB_CONTROLLER", "service": {"host": "localhost", "port": 5002}, "server": {"host": "localhost", "port": 8082}},
     NODE_INTELLIGENCE: {"name":"NODE_INTELLIGENCE", "service": {"host": "localhost", "port": 5003}, "server": {"host": "localhost", "port": 8083}},
-    NODE_MPD_GENERATOR: {"name":"NODE_INTELLIGENCE", "service": {"host": "localhost", "port": 5004}, "server": {"host": "localhost", "port": 8084}},
+    NODE_MPD_GENERATOR: {"name":"NODE_MPD_GENERATOR", "service": {"host": "localhost", "port": 5004}, "server": {"host": "localhost", "port": 8084}},
     NODE_TRANSCODER: {"name":"NODE_TRANSCODER", "service": {"host": "localhost", "port": 5005}, "server": {"host": "localhost", "port": 8085}},
     NODE_TRANSCODER1: {"name":"NODE_TRANSCODER1", "service": {"host": "localhost", "port": 0}, "server": {"host": "localhost", "port": 7000}},
     NODE_TRANSCODER2: {"name":"NODE_TRANSCODER2", "service": {"host": "localhost", "port": 0}, "server": {"host": "localhost", "port": 7001}},
