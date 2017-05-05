@@ -46,6 +46,10 @@ promInteraction.then(() => {
         res.sendFile(path.join(__dirname, 'client/temp/signin.html'));
     });
 
+    manager.server.framework.get("/contact", function(req, res) {
+        res.sendFile(path.join(__dirname, "client/temp/contact.html"));
+    });
+
     //Home Router
 
     manager.server.framework.use("/home", homeRouter);
@@ -74,9 +78,8 @@ promInteraction.then(() => {
         res.sendFile(path.join(__dirname, "client/temp/profile.html"));
     });
 
-    /*
-    manager.server.framework.get("/contact", function(req, res) {
-        res.sendFile(path.join(__dirname, "client/temp/contact.html"));
-    });*/
+    homeRouter.get("/live", function(req, res) {
+        res.sendFile(path.join(__dirname, "client/temp/live.html"));
+    });
 
 });
