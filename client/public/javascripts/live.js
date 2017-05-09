@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-
+  var id = 1;
   var player = dashjs.MediaPlayer().create();
   player.getDebug().setLogToBrowserConsole(false);
   player.initialize();
@@ -9,10 +9,11 @@ $(document).ready(function() {
   player.setAutoSwitchQuality(false);
   player.enableBufferOccupancyABR(false);
   player.setAutoPlay(true);
-  player.attachSource("http://localhost:8080/mpd.mpd");
-  player.setLiveDelay(2);  // en secondes
+  player.attachSource("http://localhost:8080/api/mpd/"+id);
+  player.setLiveDelay(1);  // en secondes
 
-  cpt = 3;
+/*
+  cpt = 0;
 	if (player.on(MediaPlayerEvents.ERROR,onError))
   {
     cpt++;
@@ -21,7 +22,7 @@ $(document).ready(function() {
     }
   }
 
-
+*/
 
 
 });
