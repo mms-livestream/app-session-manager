@@ -17,7 +17,7 @@ $(document).ready(function() {
           }
           else {
             sessionStorage.setItem("token",res.token);
-            window.location.replace("http://localhost:8080/home");
+            window.location.replace("http://192.168.2.132:8080/home");
           }
         },
         error: function() {

@@ -25,9 +25,9 @@ class Server extends Interaction {
         return new Promise((resolve, reject) => {
             let config = dConfig[this.node].server;   //TODO etcd
 
-            this.framework.listen(config.port);
+            let listeningServer = this.framework.listen(config.port);
             console.log(`Server listening on: ${config.port}`);
-            resolve();
+            resolve(listeningServer);
         });
     }
 }

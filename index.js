@@ -67,7 +67,7 @@ promInteraction.then(() => {
     });
 
     homeRouter.get("/favorites", function(req, res) {
-        res.sendFile(path.join(__dirname + "client/temp/favoris.html"));
+        res.sendFile(path.join(__dirname, "client/temp/favoris.html"));
     });
 
     homeRouter.get("/logout", function(req, res) {
@@ -79,7 +79,9 @@ promInteraction.then(() => {
     });
 
     homeRouter.get("/live", function(req, res) {
-        res.sendFile(path.join(__dirname, "client/temp/live.html"));
+        //let tempID = ;
+        //manager.service.cli.NODE_DB_CONTROLLER.act({role:"viewers", cmd:"add"}, data, console.log);
+        res.status(200).sendFile(path.join(__dirname, "client/temp/live.html"));
     });
 
 });

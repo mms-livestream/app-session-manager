@@ -13,7 +13,7 @@
     "express": "^4.15.2",
     "jsonwebtoken": "^7.3.0",
     "jwt-simple": "^0.5.1",
-    "mms-core": "^0.1.25",
+    "mms-core": "^0.1.29",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "react": "^15.4.2",

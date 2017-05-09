@@ -9,7 +9,7 @@ $(document).ready(function() {
   player.setAutoSwitchQuality(false);
   player.enableBufferOccupancyABR(false);
   player.setAutoPlay(true);
-  player.attachSource("http://localhost:8080/api/mpd/"+id);
+  player.attachSource("http://192.168.2.132:8080/api/mpd/"+id);
   player.setLiveDelay(1);  // en secondes
 
 /*

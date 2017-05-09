@@ -26,12 +26,11 @@ module.exports = function (options) {
         });
 
         let poolServers = msg.data;
-
+        console.log(poolServers);
         //msg.data = {"234": {"serv1", "serv2", "serv3"}};
 
         validation.then(() => {
             let one = {};
-		console.log(service.cli);
             for (let id_viewer in poolServers) {
                 one = {"id_viewer": id_viewer, "servers": poolServers[id_viewer]};
                 (function(data) {   //jshint ignore:line
