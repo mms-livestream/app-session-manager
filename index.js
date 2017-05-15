@@ -32,16 +32,24 @@ let promInteraction = manager.service.listen()
 
 //App public server
 promInteraction.then(() => {
+    //manager.server.framework.use(express.static('client/app-viewer-web/build/'));  // serve public files
     manager.server.framework.use(express.static('client/public'));  // serve public files
 })
 .then(() => {
 
     let homeRouter = express.Router();
 
+
+  /*  manager.server.framework.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client/app-viewer-web/build/index.html'));
+    });*/
+
+
     manager.server.framework.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/temp/index.html'));
     });
 
+    /*
     manager.server.framework.get("/signin", function(req, res) {
         res.sendFile(path.join(__dirname, 'client/temp/signin.html'));
     });
@@ -51,7 +59,7 @@ promInteraction.then(() => {
     });
 
     //Home Router
-
+    
     manager.server.framework.use("/home", homeRouter);
 
     homeRouter.get("/", function(req, res) {
@@ -82,6 +90,6 @@ promInteraction.then(() => {
         //let tempID = ;
         //manager.service.cli.NODE_DB_CONTROLLER.act({role:"viewers", cmd:"add"}, data, console.log);
         res.status(200).sendFile(path.join(__dirname, "client/temp/live.html"));
-    });
+    });*/
 
 });

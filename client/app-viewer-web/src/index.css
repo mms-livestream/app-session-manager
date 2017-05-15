@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+  color: rgba(144, 55, 55, 0.82);
+}
+
+#police {
+color: rgba(144, 55, 55, 0.82);
+}
+
+.bg-primary {
+background: #F2775E;
+}

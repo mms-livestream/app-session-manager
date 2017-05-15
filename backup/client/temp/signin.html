@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>M&ampM's</title>
+    <link href="/stylesheets/template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/template/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/creative.min.css" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="/images/mini-logoV1.png" />
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="/">M&ampM's</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+              <img id="homeHeading" src="images/logo_trans.png" style="background-color:transparent; border:1px;" class="img-thumbnail">
+                <hr>
+                <p>Your high quality live video app as you've never seen if before !!</p>
+
+             <div class="container">
+               <div class="row">
+               <div id="login" class="col-xs-6 col-lg-8 center col-lg-offset-2 col-xs-offset-3">
+                 <div hidden class="alert alert-danger err1"><strong>Login failed</strong> Username not found or wrong password</div>
+                 <div hidden class="alert alert-danger err2"><strong>Login failed</strong> Please fill the fields</div>
+                  <form class="form-signin" method="post" action="/api/login">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    <div class="form-group"><input type="text" name="username" class="form-control inputUsername" placeholder="Username" required autofocus> </div>
+                    <div class="form-group"><input type="password" name="password" class="form-control inputPassword" placeholder="Password" required> </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <div class="checkbox">
+                      <label>
+                        <a> not registered </a>
+                      </label>
+                    </div>
+                  </form>
+                  </div>
+
+                  <div hidden id="register" class="col-xs-6 col-lg-8 center col-lg-offset-2 col-xs-offset-3">
+                  <form class="form-signin" method="post" action="/api/register">
+                    <h2 class="form-signin-heading">Please register</h2>
+                    <div class="form-group"> <input type="text" name="username" class="form-control inputUsername" placeholder="Username" required autofocus> </div>
+                    <div class="form-group"> <input type="email" name="email" class="form-control inputEmail" placeholder="Email address" required autofocus> </div>
+                    <div class="form-group"> <input type="password" name="password" class="form-control inputPassword" placeholder="Password" required> </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+
+            </div></div>
+
+
+    </header>
+
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">We've got what you need!</h2>
+                    <hr class="light">
+                    <p class="text-faded">Use our live streaming video application and everything you need will finally be in your hands</p>
+                    <a href="/aboutus" class="page-scroll btn btn-default btn-xl sr-button">About Us!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">At Your Service</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
+                        <h3>Hight quality</h3>
+                        <p class="text-muted">Hight quality streaming without interruptions </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                        <h3>Ready to Ship</h3>
+                        <p class="text-muted">You can post all your videos live and receive live feedback from your most faithful viewers!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                        <h3>Up to Date</h3>
+                        <p class="text-muted">We update dependencies to keep things fresh.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
+                        <h3>Made with Love</h3>
+                        <p class="text-muted">And all these services for free simply because we love it!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Between us</h2>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Would you like to text with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:your-email@mms.com">feedback@mms.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/stylesheets/template/vendor/jquery/jquery.min.js"></script>
+    <script src="/stylesheets/template/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="/javascripts/signin.js"></script>
+    <script src="/stylesheets/template/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="/stylesheets/template/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/stylesheets/template/js/creative.min.js"></script>
+
+
+</body>
+
+</html>

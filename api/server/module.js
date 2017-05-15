@@ -19,21 +19,43 @@ let jwtOptions = {
     secretOrKey: 'tasmanianDevil'    //TODO distribute secret securely
 };
 
+let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
+  let user = jwt_payload;
+  console.log('Payload received:', jwt_payload);
+  // TODO database call to verify if user in mongodb
+  /*
+  var user = users[_.findIndex(users, {id: jwt_payload.id})];
+  if (user) {
+    next(null, user);
+  } else {
+    next(null, false);
+  }*/
+  if (user.id) {
+    next(null, user);
+  }
+  else {
+    next(null, false);
+  }
+});
+
+passport.use(strategy);
+
 let config = require('../../config.js');
-
-
 
 module.exports = (options) => {
 
     let service = options.service;
     let router = express.Router();
 
+    let authRouter = express.Router();  //protected routes
+    authRouter.use(passport.initialize());
+
     router.post('/login', function (req, res) {
         let data = req.body;
 	//console.log(typeof(data));
         service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"authenticate"}, data, (err, result) => {
             if (result.data.authenticated) {
-                let payload = {username: result.data.username};
+                let payload = {id: result.data.id, username: result.data.username};
                 let token = jwt.sign(payload, jwtOptions.secretOrKey);
                 console.log(payload);
 
@@ -48,7 +70,7 @@ module.exports = (options) => {
 
     router.post('/register', function (req, res) {
         let data = req.body;
-        console.log(data);
+        console.log(data.username);
 
         service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"add"}, data, console.log);
         res.sendStatus(200);
@@ -65,6 +87,28 @@ module.exports = (options) => {
         else {
             res.sendStatus(404);
         }
+    });
+
+    //Protected routes
+
+    router.use("/auth", authRouter);
+
+    authRouter.get('/connect', passport.authenticate('jwt', { session: false }), function (req, res) {
+      res.send(req.user);
+    });
+
+    authRouter.get('/dashboard', passport.authenticate('jwt', { session: false }), function (req, res) {
+      res.send("Hello");
+    });
+
+    authRouter.get('/play', passport.authenticate('jwt', { session: false }), function (req, res) {
+      const query = req.query;
+      const user = req.user;
+
+      let data = {"id_viewer": user.id, "id_uploader": query.id_uploader}
+      service.cli.NODE_DB_CONTROLLER.act({role:"viewer", cmd:"add"}, data, console.log);
+
+      res.send("OK done");
     });
 
     return router;
