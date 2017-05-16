@@ -14,6 +14,7 @@ class SignOut extends Component {
   componentDidMount() {
     let token = sessionStorage.getItem('token');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     window.location.replace('/');
   }
 

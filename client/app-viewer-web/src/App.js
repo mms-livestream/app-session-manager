@@ -28,7 +28,7 @@ const configAxios = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {user: {logged: false}};
+    this.state = {user: {id_user: "", username: ""}};
   }
 
   //TODO improve to Redux, dispatch from root?
@@ -37,7 +37,9 @@ class App extends Component {
     //Logged : get user information
     axios.get(`${config.API_URL_PREFIX}/auth/connect`, configAxios)
     .then(res => {
-      this.setState({user: {"logged": true, "username": res.data.username}});
+      let user = {"id": res.data.id, "username": res.data.username};
+      this.setState({user: user});
+      sessionStorage.setItem('user', JSON.stringify(user)); //Fix for dashjs access from external file
     })
     .catch(err => {
       console.log(err); //even if not authorized ok

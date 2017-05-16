@@ -9,6 +9,31 @@ let configAxios = {
   headers: {'Authorization': "JWT " + sessionStorage.getItem('token')}
 };
 
+const boxStyle = {
+  background: '#FBF9F0',
+  minHeight: '50vh',
+  opacity: '0.9',
+  borderRadius: '10px',
+  boxShadow: '5px 5px 5px #888888',
+  paddingBottom: '3vh',
+  color: 'rgba(144, 55, 55, 0.82)'
+};
+
+const box = (
+    <div className="container">
+         <div className="col-lg-8 col-lg-offset-2" style={boxStyle}>
+           <h3 className="center"> Live content</h3>
+           <div className="col-lg-4">
+             <img src="images/test.png" className="img-thumbnail" />
+             <div className="panel-body"> Video title</div>
+             <span className="label label-info">Music</span>
+             <span className="label label-info">Live</span>
+           </div>
+         </div>
+    </div>
+);
+
+
 class Dashboard extends Component {
 
   componentDidMount() {
@@ -26,7 +51,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="Dashboard">
-        <Hero />
+        <Hero insideHero={box} />
       </div>
     );
   }

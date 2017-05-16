@@ -9,6 +9,18 @@ let configAxios = {
   headers: {'Authorization': "JWT " + sessionStorage.getItem('token')}
 };
 
+const LivePlayer = (
+
+  <div id="live-player">
+    <div id="videocontainer" style={{size: '100%'}}>
+      <video id="videoplayer" controls="true"></video>
+    </div>
+  </div>
+
+);
+/*<div className="embed-responsive embed-responsive-16by9" >*/
+/*</div>*/
+
 class Play extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +54,7 @@ class Play extends Component {
   render() {
     return (
       <div className="Play">
-        <Hero />
+        <Hero insideHero={LivePlayer} />
       </div>
     );
   }
