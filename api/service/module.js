@@ -25,14 +25,14 @@ module.exports = function (options) {
             resolve();
         });
 
-        let poolServers = msg.data;
-        console.log(poolServers);
-        //msg.data = {"234": {"serv1", "serv2", "serv3"}};
+        let pool = msg.data;
+        console.log(pool);
+        //msg.data = {"234": {"id_uploader": 34, "servers":{"serv1", "serv2", "serv3"} }};
 
         validation.then(() => {
             let one = {};
-            for (let id_viewer in poolServers) {
-                one = {"id_viewer": id_viewer, "servers": poolServers[id_viewer]};
+            for (let id_viewer in pool) {
+                one = {"id_viewer": id_viewer, "id_uploader": pool[id_viewer].id_uploader, "servers": pool[id_viewer].servers};
                 (function(data) {   //jshint ignore:line
                     service.cli.NODE_MPD_GENERATOR.act({role:"mpd", cmd:"generate"}, data, (err, res) => {
                         fs.writeFile(`${config.DIR_ROOT}/data/mpd/${data.id_viewer}.mpd`, res.data, function(err) {
