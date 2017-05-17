@@ -46,13 +46,15 @@ module.exports = (options) => {
 
     let service = options.service;
     let router = express.Router();
+    let socketio = options.socketio;
 
     let authRouter = express.Router();  //protected routes
     authRouter.use(passport.initialize());
 
     router.post('/login', function (req, res) {
         let data = req.body;
-	//console.log(typeof(data));
+	      console.log("LOGIN");
+        console.log(data);
         service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"authenticate"}, data, (err, result) => {
             if (result.data.authenticated) {
                 let payload = {id: result.data.id, username: result.data.username};
@@ -70,6 +72,7 @@ module.exports = (options) => {
 
     router.post('/register', function (req, res) {
         let data = req.body;
+        console.log("REGISTER");
         console.log(data.username);
 
         service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"add"}, data, console.log);

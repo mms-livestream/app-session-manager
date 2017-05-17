@@ -21,6 +21,10 @@ import Play from './Play';
 
 import config from './config';
 
+//Socketio
+const io = require('socket.io-client');
+const socket = io("http://localhost:8080");
+
 const configAxios = {
   headers: {'Authorization': "JWT " + sessionStorage.getItem('token')}
 };
@@ -28,12 +32,19 @@ const configAxios = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {user: {id_user: "", username: ""}};
+    this.state = {user: {id_user: "", username: ""}, socketio: {socket: socket}};
   }
 
   //TODO improve to Redux, dispatch from root?
 
   componentDidMount() {
+    //Socketio
+    socket.on("connect", () => {
+      console.log("Socketio connected");
+      this.setState({socketio: {socket: socket}});
+    });
+
+
     //Logged : get user information
     axios.get(`${config.API_URL_PREFIX}/auth/connect`, configAxios)
     .then(res => {
@@ -56,11 +67,11 @@ class App extends Component {
         <div>
           <Route path='/' component={this.transmit(NavBar, {"user": this.state.user})} />
           <Route exact path='/' component={Landing} />
-          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/dashboard' component={this.transmit(Dashboard, {"socket": this.state.socketio.socket})} />
           <Route exact path='/signin' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/signout' component={SignOut} />
-          <Route path='/play' component={Play} />
+          <Route path='/play' component={this.transmit(Play, {"user": this.state.user, "socket": this.state.socketio.socket})} />
           <Route path='/' component={Footer} />
         </div>
       </Router>

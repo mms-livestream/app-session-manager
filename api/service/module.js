@@ -8,14 +8,14 @@ const Promise = require('bluebird');  //jshint ignore:line
 const fs = Promise.promisifyAll(require('fs'));
 const XMLParser = Promise.promisifyAll(require('xml2js'));
 
-function extractTimeFromMPD(XMLFilePath) {
+function extractInfosFromMPD(XMLFilePath) {
   return new Promise( (resolve, reject) => {
     fs.readFileAsync(XMLFilePath, 'utf8')
     .then((XMLData) => XMLParser.parseStringAsync(XMLData))
     .then((data) => {
-      let initialTime = data['MPD']['$'].availabilityStartTime;
-      console.log(initialTime);
-      resolve(initialTime);
+      let PREVinitialTime = data['MPD']['$'].availabilityStartTime;
+      let PREVid_video = parseInt(data['MPD']['Period'][0].AdaptationSet[0].BaseURL[0].split("/")[5]);  //ATTENTION convert to integer
+      resolve({"PREVinitialTime": PREVinitialTime, "PREVid_video": PREVid_video});
     })
     .catch((err) => {
       console.log(`Error on extractTimeFromMPD : ${err}`);
@@ -41,12 +41,14 @@ const config = require('../../config.js');
 module.exports = function (options) {
 
     let service = options.service;
+    let socketio = options.socketio;
 
     /**
      * Update mpd
      * @function
      */
     this.add('role:mpd,cmd:update', (msg, respond) => {
+        console.log("MPD UPDATE");
         let validation = new Promise((resolve, reject) => {
             //TODO
             resolve();
@@ -54,20 +56,24 @@ module.exports = function (options) {
 
         let pool = msg.data;
         console.log(pool);
-        //msg.data = {"234": {"id_uploader": 34, "servers":{"serv1", "serv2", "serv3"} }};
+        //msg.data = {"234": {"id_uploader": 34, "servers":["serv1", "serv2", "serv3"], "publishTime": date } };
 
         validation.then(() => {
             let one = {};
             for (let id_viewer in pool) {
-                one = {"id_viewer": id_viewer, "id_uploader": pool[id_viewer].id_uploader, "servers": pool[id_viewer].servers};
+                one = {"id_viewer": id_viewer, "id_uploader": pool[id_viewer].id_uploader, "servers": pool[id_viewer].servers, "publishTime": pool[id_viewer].publishTime};
+                console.log(one);
                 (function(data) {   //jshint ignore:line
                     let MPDFilePath = `${config.DIR_ROOT}/data/mpd/${data.id_viewer}.mpd`;
                     console.log(MPDFilePath);
                     fs.statAsync(MPDFilePath)
                     //File exists : only need to update servers, not the time
-                    .then((stat) => extractTimeFromMPD(MPDFilePath))
-                    .then((initialTime) => {
-                      data.initialTime = initialTime; //attach initial time to notify mpd generator
+                    .then((stat) => extractInfosFromMPD(MPDFilePath))
+                    .then((infos) => {
+                      console.log(infos);
+                      data.PREVid_video = infos.PREVid_video;
+                      data.PREVinitialTime = infos.PREVinitialTime; //attach initial time to notify mpd generator
+                      console.log(data);
                       generateMPD(data, MPDFilePath, service);
                     })
                     .catch((err) => {
@@ -100,5 +106,32 @@ module.exports = function (options) {
             respond(`Error on generating mpd: ${err}`, { 'code': 500 , 'status': null });
         });
     });
+
+    this.add('role:videos,cmd:update', (msg, respond) => {
+      let validation = new Promise((resolve, reject) => {
+          //TODO
+          resolve();
+      });
+
+      let test = { "45": {"title":"Blaze Sun", "tags":["fire", "red"]},  "60": {"title":"Noellie", "tags":["eleve", "detesteGrivel"]}};
+
+      validation.then(() => {
+        //Users connected (nobody connected -> do nothing)
+        if(options.socketio.socket) {
+          console.log("TEST");
+          setTimeout(() => options.socketio.io.sockets.emit('update-videos', test), 2000);
+
+        }
+
+        respond(null, { 'code': 200 , 'status': "Mpd generated succesfully" });
+
+      })
+    });
+
+
+
+
+
+
 
 };

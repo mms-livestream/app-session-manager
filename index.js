@@ -8,18 +8,24 @@ let Promise = require('bluebird');  //jshint ignore:line
 
 let path = require('path');
 let express = require('express');
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
+const socketio = require('socket.io');
 
 let core = require('mms-core');
 let serverAPI = require('./api/server/module.js');
 let serviceAPI = require('./api/service/module.js');
+
+
 
 //Class
 
 class SessionManager {
     constructor() {
         this.node = "NODE_SESSION_MANAGER";
-        this.service = new core.Service(this.node, serviceAPI, {"prepare": true});
-        this.server = new core.Server(this.node, serverAPI, {"service": this.service});
+        this.socketio = {io: null};
+        this.service = new core.Service(this.node, serviceAPI, {"prepare": true, "socketio": this.socketio});
+        this.server = new core.Server(this.node, serverAPI, {"service": this.service, "socketio": this.socketio});
     }
 }
 
@@ -28,7 +34,15 @@ class SessionManager {
 let manager = new SessionManager();
 
 let promInteraction = manager.service.listen()
-    .then(() => manager.server.listen());
+    .then(() => manager.server.listen())
+    .then((listeningServer) => {
+      manager.socketio.io = socketio(listeningServer);    //hack : socketio initialized after all the core, by reference
+      manager.socketio.io.on('connection', (socket) => {
+        console.log('User connected');
+        manager.socketio.socket = socket;
+        eventEmitter.emit('socketio-user');
+      });
+    });
 
 //App public server
 promInteraction.then(() => {
@@ -59,7 +73,7 @@ promInteraction.then(() => {
     });
 
     //Home Router
-    
+
     manager.server.framework.use("/home", homeRouter);
 
     homeRouter.get("/", function(req, res) {
@@ -91,5 +105,14 @@ promInteraction.then(() => {
         //manager.service.cli.NODE_DB_CONTROLLER.act({role:"viewers", cmd:"add"}, data, console.log);
         res.status(200).sendFile(path.join(__dirname, "client/temp/live.html"));
     });*/
+
+    //Socketio Rules
+    eventEmitter.addListener('socketio-user', () => {
+      manager.socketio.socket.on("send-msg", (msg) => {
+        console.log("OK received");
+        console.log(msg);
+        manager.socketio.socket.emit("update-chat", msg);
+      })
+    });
 
 });
