@@ -7,7 +7,8 @@ const frameStyle = {
   borderRadius: '10px',
   boxShadow: '5px 5px 5px #888888',
   paddingBottom: '3vh',
-  color: 'rgba(144, 55, 55, 0.82)'
+  color: 'rgba(144, 55, 55, 0.82)',
+  marginTop: "10px"
 };
 
 const Frame = function(props) {

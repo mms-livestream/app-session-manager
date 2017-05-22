@@ -75,36 +75,44 @@ class NavBar extends Component {
 
     else {
       return (
-        <nav className="navbar navbar-inverse navbar-fixed-top">
+
+        <nav id="mainNav" className="navbar navbar-inverse navbar-fixed-top">
          <div className="container-fluid">
            <div className="navbar-header">
-            <a href="/" className="navbar-brand"><img src="/images/logo.png" style={logoStyle}/></a> 
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span className="sr-only">Toggle navigation</span> Menu <i className="fa fa-bars"></i>
+            </button>
+            <a href="/" className="navbar-brand page-scroll"><img src="/images/logo.png" style={logoStyle}/></a>
            </div>
-           <ul className="nav navbar-nav">
-             <li className=""><a href="/">Dashboard</a></li>
-           </ul>
-           <ul className="nav navbar-nav navbar-right">
-             <li className=""><a href="/">My Favorites</a></li>
-             <li className=""><a href="/">History</a></li>
-             <li className="dropdown">
-               <a className="dropdown-toggle" data-toggle="dropdown" href="#">Others
-               <span className="caret"></span></a>
-               <ul className="dropdown-menu">
-                 <li><a href="/favorites">Feature 1</a></li>
-                 <li><a href="/history">Feature 2</a></li>
-               </ul>
-             </li>
-             <li className="dropdown">
-             <a className="dropdown-toggle" data-toggle="dropdown">{user.username} <span className="caret"></span> </a>
-             <ul className="dropdown-menu">
-               <li><a href="/dashboard">Dashboard</a></li>
-               <li><a href="/preferences">Preferences</a></li>
-               <li><a href="/signout">Signout</a></li>
+           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+             <ul className="nav navbar-nav">
+               <li className=""><a href="/">Dashboard</a></li>
              </ul>
-             </li>
-           </ul>
+             <ul className="nav navbar-nav navbar-right">
+               <li className=""><a href="/">My Favorites</a></li>
+               <li className=""><a href="/">History</a></li>
+               <li className="dropdown">
+                 <a className="dropdown-toggle" data-toggle="dropdown" href="#">Others
+                 <span className="caret"></span></a>
+                 <ul className="dropdown-menu">
+                   <li><a href="/favorites">Feature 1</a></li>
+                   <li><a href="/history">Feature 2</a></li>
+                 </ul>
+               </li>
+               <li className="dropdown">
+               <a className="dropdown-toggle" data-toggle="dropdown">{user.username} <span className="caret"></span> </a>
+               <ul className="dropdown-menu">
+                 <li><a href="/dashboard">Dashboard</a></li>
+                 <li><a href="/preferences">Preferences</a></li>
+                 <li><a href="/signout">Signout</a></li>
+               </ul>
+               </li>
+             </ul>
+           </div>                                                                                 
          </div>
        </nav>
+
       );
     }
 

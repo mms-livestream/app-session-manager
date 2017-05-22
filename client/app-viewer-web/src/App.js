@@ -18,12 +18,17 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import SignOut from './SignOut';
 import Play from './Play';
+import AboutUs from './AboutUs';
+
+import Test from './Test';
 
 import config from './config';
 
 //Socketio
 const io = require('socket.io-client');
+//const socket = io("http://192.168.2.132:8080");
 const socket = io("http://localhost:8080");
+
 
 const configAxios = {
   headers: {'Authorization': "JWT " + sessionStorage.getItem('token')}
@@ -42,6 +47,7 @@ class App extends Component {
     socket.on("connect", () => {
       console.log("Socketio connected");
       this.setState({socketio: {socket: socket}});
+      //sessionStorage.setItem('socket', JSON.stringify(socket)); //Fix for dashjs access from external file
     });
 
 
@@ -65,14 +71,16 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path='/' component={this.transmit(NavBar, {"user": this.state.user})} />
+          {<Route path='/' component={this.transmit(NavBar, {"user": this.state.user})} />}
           <Route exact path='/' component={Landing} />
           <Route exact path='/dashboard' component={this.transmit(Dashboard, {"socket": this.state.socketio.socket})} />
           <Route exact path='/signin' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/signout' component={SignOut} />
-          <Route path='/play' component={this.transmit(Play, {"user": this.state.user, "socket": this.state.socketio.socket})} />
-          <Route path='/' component={Footer} />
+          <Route exact path='/aboutus' component={AboutUs} />
+          {/*<Route path='/play' component={this.transmit(Play, {"user": this.state.user, "socket": this.state.socketio.socket})} />*/}
+          <Route path='/play' component={Play} />
+          {<Route path='/' component={Footer} />}
         </div>
       </Router>
     );

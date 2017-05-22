@@ -7,6 +7,9 @@ import Frame from './Frame';
 
 import config from './config';
 
+const io = require('socket.io-client');
+const socket = io("http://localhost:8080");
+
 let configAxios = {
   headers: {'Authorization': "JWT " + sessionStorage.getItem('token')}
 };
@@ -20,6 +23,10 @@ const LivePlayer = (
   </div>
 
 );
+
+
+
+
 /*<div className="embed-responsive embed-responsive-16by9" >*/
 /*</div>*/
 /*
@@ -130,16 +137,20 @@ const InsideFrame = function(props) {
 class Play extends Component {
   constructor(props) {
     super(props);
-    this.state = {IDVideo: null, messages: [], socket: this.props.app.socket};
+    //this.state = {IDVideo: null, messages: [], socket: this.props.app.socket};
+    this.state = {IDVideo: null, messages: [], user: sessionStorage.getItem("user"), socket: socket};
     //[{text: "Bonjour lwiip"}, {text: "C'est eric"}]
   }
 
   componentDidMount() {
+    //console.log(this.props.app.socket);
+    //console.log(this.props.app.user);
+
     //Socketio
-    //let socket = this.props.app.socket;
     this.state.socket.on("connect", () => {
       console.log("Socketio connected");
     });
+
     this.state.socket.on("update-chat", (msg) => {
       console.log(msg);
       this.setState({messages: update(this.state.messages, {$push: [msg] }) }, function() {
@@ -172,11 +183,22 @@ class Play extends Component {
 
   render() {
     return (
+
       <div className="Play">
-        <Hero insideHero={<Frame insideFrame={<InsideFrame messages={this.state.messages} socket={this.state.socket} user={this.props.app.user} />} title="Play" />} />
+        <Hero insideHero={<Frame insideFrame={<InsideFrame messages={this.state.messages} socket={this.state.socket} user={this.state.user} />} title="Play" />} />
       </div>
+
     );
   }
 }
+
+
+/*
+
+<div className="Play">
+  <Hero insideHero={LivePlayer} />
+</div>
+
+*/
 
 export default Play;

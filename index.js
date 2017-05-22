@@ -46,8 +46,8 @@ let promInteraction = manager.service.listen()
 
 //App public server
 promInteraction.then(() => {
-    //manager.server.framework.use(express.static('client/app-viewer-web/build/'));  // serve public files
-    manager.server.framework.use(express.static('client/public'));  // serve public files
+    manager.server.framework.use(express.static('client/app-viewer-web/build/'));  // serve public files
+    //manager.server.framework.use(express.static('client/app-viewer-web/public/'));  //TEMP
 })
 .then(() => {
 
@@ -105,6 +105,18 @@ promInteraction.then(() => {
         //manager.service.cli.NODE_DB_CONTROLLER.act({role:"viewers", cmd:"add"}, data, console.log);
         res.status(200).sendFile(path.join(__dirname, "client/temp/live.html"));
     });*/
+
+    manager.server.framework.get("/test", function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, "test.html"));
+    });
+
+    manager.server.framework.get("/dash", function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, "dash.all.min.js"));
+    });
+
+    manager.server.framework.get("/jquery", function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, "jquery.min.js"));
+    });
 
     //Socketio Rules
     eventEmitter.addListener('socketio-user', () => {

@@ -18,7 +18,7 @@ function extractInfosFromMPD(XMLFilePath) {
       resolve({"PREVinitialTime": PREVinitialTime, "PREVid_video": PREVid_video});
     })
     .catch((err) => {
-      console.log(`Error on extractTimeFromMPD : ${err}`);
+      console.log(`Error on extractInfosFromMPD : ${err}`);
       reject(err);
     });
   });
@@ -26,6 +26,8 @@ function extractInfosFromMPD(XMLFilePath) {
 
 function generateMPD(data, MPDFilePath, service) {
   return new Promise(function(resolve, reject) {
+    console.log("test");
+    console.log(data);
     service.cli.NODE_MPD_GENERATOR.act({role:"mpd", cmd:"generate"}, data, (err, res) => {
         fs.writeFileAsync(MPDFilePath, res.data)
         .then(() => console.log(`Generated MPD file for viewer: ${data.id_viewer}`))

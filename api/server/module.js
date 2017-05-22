@@ -109,6 +109,10 @@ module.exports = (options) => {
       const user = req.user;
 
       let data = {"id_viewer": user.id, "id_uploader": query.id_uploader};
+
+      console.log("PLAY");
+      console.log(data);
+
       service.cli.NODE_DB_CONTROLLER.act({role:"viewer", cmd:"add"}, data, console.log);
 
       res.send("OK done");

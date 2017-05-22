@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+
+
+    <div class="embed-responsive embed-responsive-16by9" >
+  <div id="videocontainer"  style="size:100%" >
+    <video id="videoplayer" controls="true" ></video>
+  </div>
+</div>
+
+  <script src="jquery"></script>
+  <script src="dash"></script>
+  <script>
+
+  var id = "591b1e1665d7ae56d97daf08";
+  var player = dashjs.MediaPlayer().create();
+  player.getDebug().setLogToBrowserConsole(false);
+  player.initialize();
+  player.attachView(document.getElementById('videoplayer'));
+  player.attachVideoContainer(document.getElementById('videocontainer'));
+  player.setAutoSwitchQuality(false);
+  player.enableBufferOccupancyABR(false);
+  player.setAutoPlay(true);
+  player.attachSource("http://192.168.2.132:8080/api/mpd/"+id);
+  player.setLiveDelay(1);  // en secondes
+  //player.setLiveDelayFragmentCount(1);
+  </script>
+
+  </body>
+</html>

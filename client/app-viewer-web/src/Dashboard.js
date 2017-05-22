@@ -68,7 +68,7 @@ function buildDashboard(data) {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {dashboard: {videos: { "45": {"title":"videotitle", "tags":["test", "again"]} }}}
+    this.state = {dashboard: {videos: { "1": {"title":"Test Video", "tags":["mms", "team", "demo"]} }}}
   }
 
   componentDidMount() {
