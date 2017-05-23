@@ -75,8 +75,11 @@ module.exports = (options) => {
         console.log("REGISTER");
         console.log(data.username);
 
-        service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"add"}, data, console.log);
-        res.sendStatus(200);
+        service.cli.NODE_DB_CONTROLLER.act({role:"users", cmd:"add"}, data, function(err, result) {
+          console.log(result);
+          res.sendStatus(200);
+        });
+
     });
 
     router.get('/mpd/:id', function (req, res) {

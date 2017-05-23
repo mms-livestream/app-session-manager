@@ -17,7 +17,7 @@ const LogoHeading = (
       <img id="heading" src="/images/logo.png" className="img-thumbnail" style={headingStyle}/>
       <hr />
       <p id="police">Your high quality live video app as you ve never seen it before !</p>
-      <a href="/signin" className="btn btn-primary btn-xl page-scroll">Sign In</a>
+      <a href="/signup" className="btn btn-primary btn-xl page-scroll">Sign Up</a>
     </div>
 );
 

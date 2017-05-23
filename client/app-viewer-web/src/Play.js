@@ -118,6 +118,7 @@ class ChatBox extends Component {
   }
 }
 
+/*
 const InsideFrame = function(props) {
   return (
     <div className="container">
@@ -127,6 +128,18 @@ const InsideFrame = function(props) {
           </div>
           <div className="col-lg-5">
             <h2>Video</h2>
+            {LivePlayer}
+          </div>
+      </div>
+    </div>
+  );
+}*/
+
+const InsideFrame = function(props) {
+  return (
+    <div className="container">
+      <div className="row">
+          <div className="col-lg-9">
             {LivePlayer}
           </div>
       </div>

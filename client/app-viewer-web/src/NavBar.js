@@ -25,15 +25,15 @@ class NavBar extends Component {
           {/* TODO DROPDOWN */}
           <a id="police" className="dropdown-toggle" data-toggle="dropdown">{user.username} <span className="caret"></span> </a>
           <ul className="dropdown-menu">
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/preferences">Preferences</a></li>
+            {<li><a href="/play?v=1">Play</a></li>}
+            {/*<li><a href="/preferences">Preferences</a></li>*/}
             <li><a href="/signout">Signout</a></li>
           </ul>
         </li>
       );
     }
     else {
-      return (<li><a id="police" className="page-scroll" href="/signin">Signin</a></li>);
+      return (<li><a id="police" className="page-scroll" href="/signup">Signup</a></li>);
     }
   }
 
@@ -85,31 +85,31 @@ class NavBar extends Component {
             <a href="/" className="navbar-brand page-scroll"><img src="/images/logo.png" style={logoStyle}/></a>
            </div>
            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+           {/*
              <ul className="nav navbar-nav">
                <li className=""><a href="/">Dashboard</a></li>
-             </ul>
+             </ul>*/}
              <ul className="nav navbar-nav navbar-right">
-               <li className=""><a href="/">My Favorites</a></li>
-               <li className=""><a href="/">History</a></li>
-               <li className="dropdown">
+              {/* <li className=""><a href="/">My Favorites</a></li>*/}
+               {/*<li className=""><a href="/">History</a></li>*/}
+               {/*<li className="dropdown">
                  <a className="dropdown-toggle" data-toggle="dropdown" href="#">Others
                  <span className="caret"></span></a>
                  <ul className="dropdown-menu">
                    <li><a href="/favorites">Feature 1</a></li>
                    <li><a href="/history">Feature 2</a></li>
                  </ul>
-               </li>
+               </li>*/}
                <li className="dropdown">
                <a className="dropdown-toggle" data-toggle="dropdown">{user.username} <span className="caret"></span> </a>
                <ul className="dropdown-menu">
-                 <li><a href="/dashboard">Dashboard</a></li>
-                 <li><a href="/preferences">Preferences</a></li>
+                 {/*<li><a href="/dashboard">Dashboard</a></li>*/}
+                 {/*<li><a href="/preferences">Preferences</a></li>*/}
                  <li><a href="/signout">Signout</a></li>
                </ul>
                </li>
              </ul>
-           </div>                                                                                 
+           </div>
          </div>
        </nav>
 
